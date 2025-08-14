@@ -6,8 +6,14 @@ management:
     web:
       exposure:
         include: "*"
-health:
-  tags: jvm.memory.max, process.files.max, jvm.gc.memory.promoted, tomcat.cache.hit, system.load.average.1m, tomcat.cache.access, jvm.memory.used, jvm.gc.max.data.size, jvm.memory.committed, system.cpu.count, logback.events, spring.integration.channels, tomcat.global.sent, jvm.buffer.memory.used, tomcat.sessions.created, jvm.threads.daemon, system.cpu.usage, jvm.gc.memory.allocated, tomcat.global.request.max, tomcat.global.request, tomcat.sessions.expired, jvm.threads.live, jvm.threads.peak, cache.gets, tomcat.global.received, process.uptime, cache.removals, http.server.requests, tomcat.sessions.rejected, process.cpu.usage, tomcat.threads.config.max, jvm.classes.loaded, jvm.gc.pause, jvm.classes.unloaded, tomcat.global.error, tomcat.sessions.active.current, tomcat.sessions.alive.max, jvm.gc.live.data.size, cache.puts, tomcat.servlet.request.max, cache.evictions, tomcat.threads.current, tomcat.servlet.request, process.files.open, jvm.buffer.count, jvm.buffer.total.capacity, tomcat.sessions.active.max, spring.integration.handlers, tomcat.threads.busy, process.start.time, tomcat.servlet.error, spring.integration.sources
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: dev   # puedes agregar más tags si quieres
+    export:
+      prometheus:
+        enabled: true
+        step: 5s # frecuencia con la que Micrometer envía datos a Prometheus
 
 spring:
   application:

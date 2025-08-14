@@ -12,10 +12,14 @@ public class MicrometerConfiguration {
     @Value("${spring.application.name}")
     private String applicationName;
 
+    @Value("${app.environment:dev}")
+    private String environment;
+
     @Bean
     MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
-        return meterRegistry -> meterRegistry.config().commonTags("application", applicationName);
+        return meterRegistry -> meterRegistry.config()
+                .commonTags("application", applicationName,
+                        "environment", environment);
     }
-
 }
 
